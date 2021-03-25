@@ -22,7 +22,7 @@ public class Skills {
 	
 	//level of skill i.e., basic,intermediate,advanced levels
 	@Column(name="skillLevel")
-	private String skillLevel;
+	private Integer skillLevel;
 
 	public String getSkillName() {
 		return skillName;
@@ -32,11 +32,11 @@ public class Skills {
 		this.skillName = skillName;
 	}
 
-	public String getSkillLevel() {
+	public Integer getSkillLevel() {
 		return skillLevel;
 	}
 
-	public void setSkillLevel(String skillLevel) {
+	public void setSkillLevel(Integer skillLevel) {
 		this.skillLevel = skillLevel;
 	}
 	

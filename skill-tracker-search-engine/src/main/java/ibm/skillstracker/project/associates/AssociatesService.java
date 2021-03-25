@@ -11,6 +11,9 @@ public class AssociatesService {
 
 	@Autowired
 	AssociateRepository repo;
+	
+	@Autowired
+	Associates theAssociates;
 
 	// to get all associates
 	List<Associates> getAllAssociates() {
@@ -18,19 +21,22 @@ public class AssociatesService {
 	}
 
 	// to add new associate
-	public String addAssociate(Associates associate) {
+	public Optional<Associates> addAssociate(Associates associate) {
 
 		// check whether any associate exists with same mobile number...
 		if (checkAssociateByPhoneNo(associate.getAssociateMobileNo())) {
-			return "Associate exists already with the same number";
+			associate.setMessage("Associate exists already with the same number");
+			return Optional.of(associate);
 		} else if (checkAssociateByEmail(associate.getAssociateEmail())) {
-			return "Associate exists already with same email";
+			associate.setMessage("Associate exists already with same email");
+			return Optional.of(associate);
 		} else {
 
 			// if the associate mobile number doesn't exist it creates a new associate to
 			// database
 			repo.save(associate);
-			return "New Associate created successfully...";
+			associate.setMessage("New Associate created successfully...");
+			return Optional.of(associate);
 		}
 
 	}
@@ -90,25 +96,38 @@ public class AssociatesService {
 		}
 		return true;
 	}
+	
+	boolean checkSkillEntryBySkillName(String skill) {
+		List<String> skillsEntry = repo.checkInSkillEntry();
+		if(skillsEntry.contains(skill)) {
+			return false;
+		}
+		return true;
+	}
 
 	// update an associate
-	String updateByAssociateId(Associates associates, Integer id) {
+	Optional<Associates> updateByAssociateId(Associates associates, Integer id) {
 		// check whether any associate exists with same mobile number...
-		if (checkAssociateByPhoneNo(associates.getAssociateMobileNo())) {
-			return "Associate exists already with the same number";
-		} else if (checkAssociateByEmail(associates.getAssociateEmail())) {
-			return "Associate exists already with same email";
-		} else {
+		if (checkAssociateByPhoneNo(associates.getAssociateMobileNo()) && checkAssociateByEmail(associates.getAssociateEmail())) {
+			//return "Associate exists already with the same number";
 			associates.setAssociateId(id);
 			repo.save(associates);
-			return "Associate Id updated successfully";
+			associates.setMessage("Associate Id updated successfully");
+			return Optional.of(associates);
+		} 
+		else {
+			//if(checkAssociateBySkills(null, 0))
+			associates.setMessage("mobile and email are cannot be updated");
+			return Optional.of(associates);
 		}
+		
 	}
 
 	// remove an associate(delete by id)
-	String deleteById(Integer id) {
+	Optional<Associates> deleteById(Integer id) {
 		repo.deleteById(id);
-		return "deleted associate successfully";
+		theAssociates.setMessage("deleted associate successfully");
+		return Optional.of(theAssociates);
 	}
 
 	// find a associate by skill name
@@ -117,13 +136,46 @@ public class AssociatesService {
 	}
 
 	// add new skill
-	String addNewSkill(Skills skill, Integer id) {
+	Optional<Associates> addNewSkill(Skills skill, Integer id) {
 		if (checkAssociateBySkills(skill.getSkillName(), id)) {
 			repo.addNewSkill(id, skill.getSkillName(), skill.getSkillLevel());
-			return "New skill added successfully";
+			theAssociates.setMessage("New skill added successfully");
+			return Optional.of(theAssociates);
 		} else {
-			return "skill already exists";
+			theAssociates.setMessage("skill already exists");
+			return Optional.of(theAssociates);
 		}
 
 	}
+	
+	//delete skill
+	Optional<Associates> deleteSkill(String skillName,Integer id) {
+		repo.deleteSkill(skillName,id);
+		theAssociates.setMessage("deleted skill successfully");
+		return Optional.of(theAssociates);
+	}
+	
+	//add skills in skillsEntry
+	Optional<Associates> addSkill(SkillsEntry skill) {
+		if(checkSkillEntryBySkillName(skill.getSkill())) {
+		repo.addSkill(skill.getSkill());
+		theAssociates.setMessage("skill added successfully");
+		return Optional.of(theAssociates);
+		}
+		else {
+			theAssociates.setMessage("skill already exists");
+			return Optional.of(theAssociates);
+		}
+	}
+	
+	//get all skills in the skills in skills Entry
+	List<String> getAllSkills() {
+		List<String> skills = repo.checkInSkillEntry();
+		return skills;
+	}
+	
+	Optional<Skills> getAllSkillsFromSkillTable(){
+		return (repo.getAllSkills());
+	}
+	
 }

@@ -16,13 +16,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.springframework.stereotype.Component;
 
 
 
-
+@Component
 @Entity
 public class Associates {
 
@@ -41,6 +43,17 @@ public class Associates {
 	@CollectionTable(name = "associateSkills", joinColumns = @JoinColumn(name = "associateId"))
 //	@Cascade(value={CascadeType.ALL})
 	private Set<Skills> skills = new HashSet<Skills>();
+	
+	@Transient
+	private String message;
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
 
 	public Set<Skills> getSkills() {
 		return skills;

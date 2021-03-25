@@ -1,6 +1,7 @@
 package ibm.skillstracker.project.associates;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -29,7 +30,26 @@ public interface AssociateRepository extends CrudRepository<Associates, Integer>
 	@Query(nativeQuery = true,value="insert into associateskills(associateId,skillName,skillLevel) values(:id,:skillName,:skillLevel)")
 	void addNewSkill(@Param("id")Integer associateId,
 			@Param("skillName")String skillName,
-			@Param("skillLevel")String skillLevel);
+			@Param("skillLevel")Integer integer);
+
+	
+	@Transactional
+	@Modifying
+	@Query(nativeQuery = true,value = "delete from associateskills where associateId=:id and skillName=:skillName ")
+	void deleteSkill(@Param("skillName") String skillName,@Param("id") Integer id);
+
+	@Transactional
+	@Modifying
+	@Query(nativeQuery=true,value="insert into skillsentry(skill) values(:skill)")
+	void addSkill(@Param("skill") String skill);
+
+	@Query(nativeQuery = true,value="select skill from skillsentry")
+	List<String> checkInSkillEntry();
+
+	@Query(nativeQuery = true,value="select * from associateskills")
+	Optional<Skills> getAllSkills();
+	
+
 	
 	
 //	@Transactional

@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +32,7 @@ public class AssociatesController {
 	
 	//to add a new associate
 	@PostMapping("/associates")
-	String addAssociate(@RequestBody Associates associate) {
+	Optional<Associates> addAssociate(@RequestBody Associates associate) {
 		return service.addAssociate(associate);
 	}
 	
@@ -53,9 +54,15 @@ public class AssociatesController {
 		return service.findByAssociateEmail(email);
 	}
 	
+	//get associate details by associate mobile no(search by associate mobile No)
+	@RequestMapping("/associates/associateMobileNo/{mobileNo}")
+	List<Associates> getAssociateByMobileNo(@PathVariable String mobileNo){
+		return service.findByAssociateMobileNo(mobileNo);
+	}
+	
 	//delete associate by associateId
 	@DeleteMapping("/associates/{id}")
-	String deleteAssociateById(@PathVariable Integer id) {
+	Optional<Associates> deleteAssociateById(@PathVariable Integer id) {
 		return service.deleteById(id);
 	}
 	
@@ -67,16 +74,40 @@ public class AssociatesController {
 	
 	//update existing associate by associate Id
 	@PutMapping("/associates/update/{id}")
-	String updateAssociateById(@RequestBody Associates associates ,@PathVariable Integer id) {
+	Optional<Associates> updateAssociateById(@RequestBody Associates associates ,@PathVariable Integer id) {
 		return service.updateByAssociateId(associates,id);
 	}
 	
 	
 	//add new skill
 	@PostMapping("/associate/skill/{id}")
-	String addNewSkill(@RequestBody Skills skill,@PathVariable Integer id) {
+	Optional<Associates> addNewSkill(@RequestBody Skills skill,@PathVariable Integer id) {
 		
 		return service.addNewSkill(skill,id);
+	}
+	
+	//delete skill
+	@DeleteMapping("/associate/skill/{id}/{skillName}")
+	Optional<Associates> deleteSkill(@PathVariable Integer id,@PathVariable String skillName) {
+		return service.deleteSkill(skillName, id);
+	}
+	
+	// add skill to skills entry
+	@PostMapping("associates/skill")
+	Optional<Associates> addSkill(@RequestBody SkillsEntry skill) {
+		return service.addSkill(skill);
+	}
+	
+	//get all skills from skills entry
+	@RequestMapping("associates/skillentry")
+	List<String> getAllSkills(){
+		return service.getAllSkills();
+	}
+	
+	//get all from skill table
+	@RequestMapping("associates/skills/all")
+	Optional<Skills> getAllSkillsFromSkillsTable(){
+		return service.getAllSkillsFromSkillTable();
 	}
 
 }

@@ -1,0 +1,65 @@
+<!-- <p>search-associate works!</p> -->
+<div class="infoHeading row">
+    <div class="col-9">
+        <h4>Welcome John,</h4>
+    </div>
+    <div class="addAssociate col-1">
+        <p><a href="add-associate">Add Associate</a> </p>
+    </div>
+    <div class="col-1">
+        <p><a href="add-skill">Add <br>Skills</a></p>
+    </div>
+</div>
+<div class="display container">
+    <div class="searchMechanism">
+        <button id="search-button" type="button" (click)="searchForAll()" class="searchAll btn btn-primary">
+        Search All Associates
+      </button><br>
+        <div class="searchCriteria input-group">
+            <select class="form-control" id="searchOption" ngModel name="searchOption" #searchOption="ngModel" required (change)="displaySearchOption(searchOption)">
+          <option value="">Select one</option>
+          <option value="associateId">search By Id</option>
+          <option value="associateName">search By Name</option>
+          <option value="associateEmail">search By Email</option>
+          <option value="skillName">search By Skills</option>
+        </select>
+            <div class="form-outline">
+                <input id="search-input" type="search" id="form1" class="form-control" [(ngModel)]="searchValue" onfocus=" " />
+            </div>
+            <button id="search-button" type="button" (click)="searchForUser()" class="btn btn-primary">
+          Search
+        </button>
+        </div>
+    </div><br>
+    <div class="associateDetails row">
+        <div class='noteCardContainer'>
+            <mat-card class="noteCard" *ngFor="let associate of responseData" [routerLink]="['/update-associate',associate.associateId]">
+                <img src="../../../assets/images/profile.png" class="mat-card-image img-fluid rounded-circle" alt="user avatar">
+                <mat-card-title>
+                    <h2>{{associate.associateName}}</h2>
+                </mat-card-title>
+                <mat-card-content routerLink="../add-associate">
+                    <h2 style="font-size: 15px;">{{associate.associateEmail}}</h2>
+                    <h2 style="font-size: 15px;">{{associate.associateMobileNo}}</h2>
+
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <!-- <div class="card text-dark bg-white" style="width: 200px" *ngIf="responseDataById && !responseData"> -->
+        <div class='noteCardContainer' *ngIf="responseDataById && !responseData">
+            <mat-card class="noteCard" [routerLink]="['/update-associate',responseDataById.associateId]">
+
+                <img src="../../../assets/images/profile.png" class="mat-card-image img-fluid rounded-circle center" alt="user avatar">
+
+                <mat-card-title>
+                    <h2>{{responseDataById.associateName}}</h2>
+                </mat-card-title>
+                <mat-card-content>
+                    <h2 style="font-size: 15px;">{{responseDataById.associateEmail}}</h2>
+                    <h2 style="font-size: 15px;">{{responseDataById.associateMobileNo}}</h2>
+
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

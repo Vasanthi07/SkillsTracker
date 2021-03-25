@@ -1,0 +1,72 @@
+<!-- <p>update-associate works!</p> -->
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <div id="associateId" [(ngModel)]="theAssociate.associateId" name="associateId">Associate Details of Id: {{responseData.associateId}}
+        </div>
+        <div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Contents</th>
+                        <th scope="col">Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">AssociateID</th>
+                        <td>{{responseData.associateId}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Associate Name</th>
+                        <td>{{responseData.associateName}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Associate Email</th>
+                        <td>{{responseData.associateEmail}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Associate Mobile number</th>
+                        <td>{{responseData.associateMobileNo}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Skills</th>
+                        <td>
+                            <!-- <div *ngFor =""></div> -->
+                            <!-- <table>
+                              <tbody>
+                                  <thead>
+                                    <tr>
+                                        <th scope="col">Skill Name</th>
+                                        <th scope="col">Skill Level</th>
+                                    </tr>
+                                  </thead>
+                                <div *ngFor = "let i of responseData.skills">
+                                 <td scope="row">{{i.skillName}}</td>
+                                <td scope="row">{{i.skillLevel}}</td>
+                                </div>
+                              </tbody>
+                          </table> -->
+                            <div *ngFor="let i of responseData.skills">
+                                <li>{{i.skillName}}({{i.skillLevel}})</li>
+
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- {{responseData.skills[0].skillName}} -->
+
+<!-- <span class="glyphicon glyphicon-pencil editOption" aria-hidden="true" [routerLink]="['/add-associate']"></span> -->
+<img src="../../../assets/images/edit.png" alt="icon can't displayed" class="editOption" [routerLink]="['/update-details',responseData.associateId]">
+
+<button class="btn btn-primary" (click)=displayGraph()>Show statistics</button>
+<div *ngIf='graphFlag'>
+    <app-bar-graph associateId="responseData.associateId"></app-bar-graph>
+</div>
+
+<router-outlet></router-outlet>

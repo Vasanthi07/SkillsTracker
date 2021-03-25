@@ -1,0 +1,72 @@
+<h3 style="text-align: center; padding: 30px;"><strong><i>Add Associate</i></strong> </h3>
+<form #associateCreationForm="ngForm">
+    <div class="form-group text-center border border-light p-3 " style="margin-top:20px;">
+        <input type="text" id="associateName" class="form-control" placeholder="Associate Name" required ngModel name="associateName" [(ngModel)]="theAssociate.associateName" #associateName="ngModel" (change)="display(associateName)"><br>
+
+        <!-- Create this division below the field for any validation messages -->
+        <div class="alert alert-danger" *ngIf="associateName.touched && !associateName.valid">
+            <div *ngIf="associateName.errors.required">*required</div>
+        </div>
+
+        <input type="text" id="associateEmail" class="form-control" placeholder="Associate Email" required minlength="3" pattern="^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$" ngModel name="associateEmail" [(ngModel)]="theAssociate.associateEmail"
+            #associateEmail="ngModel"><br>
+
+        <!-- Create this division below the field for any validation messages -->
+        <div class="alert alert-danger" *ngIf="associateEmail.touched && !associateEmail.valid">
+            <div *ngIf="associateEmail.errors.required">*required</div>
+
+            <div *ngIf="associateEmail.errors.pattern">Email should match the pre-defined pattern</div>
+        </div>
+
+
+        <input type="text" class="form-control" id="associateMobileNo" ngModel name="associateMobileNo" placeholder="Associate Mobile No" #associateMobileNo="ngModel" required [(ngModel)]="theAssociate.associateMobileNo" minlength="10" maxlength="10" pattern="[0-9]{10}"><br>
+        <div class="alert alert-danger" *ngIf="associateMobileNo.touched && !associateMobileNo.valid">
+            <div *ngIf="associateMobileNo.errors.required">*required</div>
+            <div *ngIf="associateMobileNo.errors.pattern">Mobile number should match the pre-defined pattern</div>
+        </div>
+        <div class="container-fluid">
+            <div *ngFor="let skill of theSkill;let i = index">
+                <div class="row">
+
+                    <div class="col-lg-5">
+                        <select id="userSkill" class="form-control" required [(ngModel)]="skill.skillName" #userSkill="ngModel" name="skill.skillName{{i}}">
+                <option *ngFor="let k of responseDetails; let i = index" [value]="responseDetails[i]">
+                    {{responseDetails[i]}}
+                  </option>
+            </select>
+                        <div class="alert alert-danger" *ngIf="userSkill.touched && !userSkill.valid">
+                            <div *ngIf="userSkill.errors.required">skill is required</div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <select id="userSkillLevel" class="form-control" required [(ngModel)]="skill.skillLevel" name="skill.skillLevel{{i}}" #userSkillLevel="ngModel">
+                <option value="">Select skill level</option>
+                <option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]" [value]="[i]">
+                    {{i}}
+                  </option>
+            </select>
+                        <div class="alert alert-danger" *ngIf="userSkillLevel.touched && !userSkillLevel.valid">
+                            <div *ngIf="userSkillLevel.errors.required">skillLevel is required</div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <button (click)="removeValue(i)" [disabled]="butDisabled" class="btn btn-danger">Remove</button>
+                    </div>
+                    <div class="col-lg-1">
+                        <button (click)="addvalue()" class="btn btn-primary">ADD</button>
+                    </div>
+                </div>
+                <br>
+
+            </div>
+
+        </div>
+        <br>
+
+
+        <button type="button" (click)="addNewAssociate()" class=" btn btn-success btn-lg btn-block" [disabled]="!associateCreationForm.form.valid">Add Associate</button>
+
+    </div>
+</form>

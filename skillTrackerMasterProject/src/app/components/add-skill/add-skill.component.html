@@ -2,11 +2,13 @@
 
 <h3>Skills can be only added by Manager</h3>
 <div class="mb-3 row">
+    <!-- create a text box to enter the skill manager want to add -->
     <label for="inputText" class="col-sm-2 col-form-label">Skill</label>
     <div class="col-auto">
-      <input type="text" class="form-control" id="inputText" name="skill" [(ngModel)]="theSkillEntry.skill">
+        <input type="text" class="form-control" id="inputText" name="skill" [(ngModel)]="theSkillEntry.skill">
     </div>
+    <!-- on clicking it checks skills in the database and adds to the database -->
     <div class="col-auto">
         <button class="btn btn-primary" (click)="addSkill()">Add</button>
     </div>
-  </div>
+</div>

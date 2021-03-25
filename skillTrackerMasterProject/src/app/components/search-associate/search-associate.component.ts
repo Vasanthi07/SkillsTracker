@@ -28,13 +28,23 @@ export class SearchAssociateComponent implements OnInit {
       let responseUrl = this.httpClient.get("http://localhost:8065/api/associates/associateId/" + this.searchValue);
       responseUrl.subscribe((responseDataById) => {
       this.responseDataById = responseDataById;
+      if(responseDataById == null){
+        alert("please enter existing id");
+      }
       this.responseData=null;
       console.log(responseDataById); });
-    }else{
+    }
+    else if(this.searchOption == null){
+      alert("please select any option");
+    }
+    else{
       let responseUrl = this.httpClient.get("http://localhost:8065/api/associates/"+
       this.searchOption + "/" + this.searchValue);
       responseUrl.subscribe((responseData) => {
       this.responseData = responseData;
+      if(responseData==""){
+        alert("please enter correct details");
+      }
       console.log(responseData); });
       }
   }

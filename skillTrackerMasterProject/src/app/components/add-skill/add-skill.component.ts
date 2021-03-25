@@ -15,6 +15,9 @@ export class AddSkillComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+
+  //adds skills to the skills entry database
   addSkill(){
     let responseDataBack = this.theService.addSkillsInSkillsEntry(this.theSkillEntry);
     responseDataBack.subscribe((responseData)=>

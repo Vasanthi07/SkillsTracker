@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Associates } from 'src/app/associates';
 import { AssociatesService } from 'src/app/services/associates.service';
 import { Skills } from 'src/app/skills';
@@ -21,12 +22,13 @@ export class AddAssociateComponent implements OnInit {
   theSkill=[];
   responseDetails: any;
 
-  constructor(private httpClient:HttpClient,private theService:AssociatesService) {
+  constructor(private httpClient:HttpClient,private theService:AssociatesService,private router:Router) {
     this.theSkill.push({skill: ""});
    }
 
   ngOnInit(): void {
 
+    //for creating skills in combo box which is obtained from skills entry database
     let responseDataBack = this.httpClient.get("http://localhost:8065/api/associates/skillentry");
     responseDataBack.subscribe((responseData)=>
     {
@@ -70,16 +72,22 @@ export class AddAssociateComponent implements OnInit {
   }
 
   addNewAssociate() {
-    console.log("kkkk");
     this.theAssociate.skills=this.theSkill;
     console.log(this.theAssociate);
 
+    let proceed = confirm("do you want to contiue?");
+     if(proceed){
+     
+       
+     
     let responseDataBack = this.theService.addNewAssociate(this.theAssociate);
 
     responseDataBack.subscribe((responseData) => {
-     alert(responseData.message);
+      alert(responseData.message);
+      this.router.navigate(['/search-associate'])
+    
     });
-
+  }
   }
 
 

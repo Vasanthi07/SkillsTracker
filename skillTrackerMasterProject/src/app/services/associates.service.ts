@@ -8,7 +8,6 @@ import { SkillsEntry } from '../skillsentry';
 })
 export class AssociatesService {
   
-
   constructor(private httpClient:HttpClient) { }
 
 
@@ -26,6 +25,10 @@ export class AssociatesService {
   //updates existing associates in the database
   updateAssociate(associateId:any, theAssociate: any) {
     return this.httpClient.put<Associates>("http://localhost:8065/api/associates/update/"+associateId,theAssociate);
+  }
+
+  deleteEmployee(associateId: any) {
+    return this.httpClient.delete("http://localhost:8065/api/associates/"+associateId);
   }
   
 }

@@ -16,6 +16,8 @@ export class UpdateAssociateComponent implements OnInit {
   constructor(private route: ActivatedRoute,private httpClient:HttpClient,private router:Router) { }
 
   ngOnInit(): void {
+
+    //the associate is send through the router link and assign to your local variable to access it 
     this.route.paramMap.subscribe(params=>{
       this.associateId = params.get('id');
       console.log(this.associateId);
@@ -27,20 +29,21 @@ export class UpdateAssociateComponent implements OnInit {
 
   associateFormStaticContent(){
 
+    //get details of particular associate based on associate Id...
     let responseDataBack = this.httpClient.get("http://localhost:8065/api/associates/associateId/"+this.associateId);
     responseDataBack.subscribe((responseData)=>
     {
       this.responseData = responseData;
       console.log(responseData);
-      // console.log(responseData.skills.length);
+      
     });
   }
 
   graphFlag : boolean =false;
   displayGraph(){
     this.graphFlag = true;
-    // this.router.navigate(['/bar-graph',this.associateId]);
+    
   }
 
-  // numberSequence(n:number) Array<number
+  
 }

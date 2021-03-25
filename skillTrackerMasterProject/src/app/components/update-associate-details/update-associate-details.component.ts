@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Associates } from 'src/app/associates';
 import { AssociatesService } from 'src/app/services/associates.service';
 import { Skills } from 'src/app/skills';
@@ -20,12 +20,8 @@ export class UpdateAssociateDetailsComponent implements OnInit {
   skill: Skills= new Skills;
   theSkill=[];
   responseDetails: any;
-  // theAssociate:Associates = new Associates();
   associateId:any;
-  // responseData: any;
-  // TheAssociate : any;
-  // @Input('associateName') associateName:string='';
-  constructor(private route:ActivatedRoute,private httpClient:HttpClient, private theService:AssociatesService) { }
+  constructor(private route:ActivatedRoute,private httpClient:HttpClient, private theService:AssociatesService,private router:Router) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params=>{
@@ -34,27 +30,25 @@ export class UpdateAssociateDetailsComponent implements OnInit {
     });
     this.associateFormEditableContent();
 
+    //get skills from skills entry database to add skills in combobox
     let responseDataBack = this.httpClient.get("http://localhost:8065/api/associates/skillentry");
     responseDataBack.subscribe((responseData)=>
     {
       console.log(responseData);
       console.log(responseData[0]);
       this.responseDetails = responseData;
-      console.log(this.responseDetails[0]);
-      
-
     });
 
   }
   associateFormEditableContent(){
 
+    //gets details based on associate id 
     let responseDataBack = this.httpClient.get("http://localhost:8065/api/associates/associateId/"+this.associateId);
     responseDataBack.subscribe((responseData)=>
     {
       this.theAssociate = responseData;
       console.log(responseData);
       this.theSkill = this.theAssociate.skills;
-      // console.log(responseData.skills.length);
     });
   }
   
@@ -95,14 +89,33 @@ export class UpdateAssociateDetailsComponent implements OnInit {
   }
 
   responseData:any;
+  //updates associate details based on associate Id
   updateAssociate(){
-    
+    let proceed = confirm("do you want to update??");
+    if(proceed){
     let responseDataBack = this.theService.updateAssociate(this.theAssociate.associateId, this.theAssociate);
     responseDataBack.subscribe((responseData)=>{
       this.responseData = responseData;
       alert(responseData.message);
-    })
+      this.router.navigate(['/search-associate']);
+    });
   }
+
+  }
+
+  deleteAssociate(){
+    let proceed = confirm("do you want to delete?");
+    if(proceed){
+    let responseDataBack = this.theService.deleteEmployee(this.theAssociate.associateId);
+    responseDataBack.subscribe((responseData)=>
+    {
+      this.responseData = responseData;
+      alert(this.responseData.message);
+      this.router.navigate(['search-associate']);
+      
+    });
+  }
+}
 
 
 }

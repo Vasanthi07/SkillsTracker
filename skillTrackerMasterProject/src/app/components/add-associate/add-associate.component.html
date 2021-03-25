@@ -1,34 +1,43 @@
-<h3 style="text-align: center; padding: 30px;"><strong><i>Add Associate</i></strong> </h3>
+<h3 style="text-align: center; padding: 30px; margin-left: 15px;"><strong>Add Associate</strong> </h3>
 <form #associateCreationForm="ngForm">
-    <div class="form-group text-center border border-light p-3 " style="margin-top:20px;">
-        <input type="text" id="associateName" class="form-control" placeholder="Associate Name" required ngModel name="associateName" [(ngModel)]="theAssociate.associateName" #associateName="ngModel" (change)="display(associateName)"><br>
-
-        <!-- Create this division below the field for any validation messages -->
-        <div class="alert alert-danger" *ngIf="associateName.touched && !associateName.valid">
-            <div *ngIf="associateName.errors.required">*required</div>
+    <div class="form-group text-center border border-dark p-3 m-3" style="margin-top:20px;">
+        <div class="row m-3">
+            <div class="col-m-6 w-50">
+                <input type="text" id="associateName" class="form-control" placeholder="Associate Name" required ngModel name="associateName" [(ngModel)]="theAssociate.associateName" #associateName="ngModel" (change)="display(associateName)"><br>
+            </div>
+            <!-- Create this division below the field for any validation messages -->
+            <div class="alert alert-danger" *ngIf="associateName.touched && !associateName.valid">
+                <div *ngIf="associateName.errors.required">*required</div>
+            </div>
         </div>
 
-        <input type="text" id="associateEmail" class="form-control" placeholder="Associate Email" required minlength="3" pattern="^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$" ngModel name="associateEmail" [(ngModel)]="theAssociate.associateEmail"
-            #associateEmail="ngModel"><br>
+        <div class="row m-3">
+            <div class="col-m-6 w-50">
+                <input type="text" id="associateEmail" class="form-control" placeholder="Associate Email" required minlength="3" pattern="^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$" ngModel name="associateEmail" [(ngModel)]="theAssociate.associateEmail"
+                    #associateEmail="ngModel"><br>
+            </div>
+            <!-- Create this division below the field for any validation messages -->
+            <div class="alert alert-danger" *ngIf="associateEmail.touched && !associateEmail.valid">
+                <div *ngIf="associateEmail.errors.required">*required</div>
 
-        <!-- Create this division below the field for any validation messages -->
-        <div class="alert alert-danger" *ngIf="associateEmail.touched && !associateEmail.valid">
-            <div *ngIf="associateEmail.errors.required">*required</div>
-
-            <div *ngIf="associateEmail.errors.pattern">Email should match the pre-defined pattern</div>
+                <div *ngIf="associateEmail.errors.pattern">Email should match the pre-defined pattern</div>
+            </div>
         </div>
 
-
-        <input type="text" class="form-control" id="associateMobileNo" ngModel name="associateMobileNo" placeholder="Associate Mobile No" #associateMobileNo="ngModel" required [(ngModel)]="theAssociate.associateMobileNo" minlength="10" maxlength="10" pattern="[0-9]{10}"><br>
-        <div class="alert alert-danger" *ngIf="associateMobileNo.touched && !associateMobileNo.valid">
-            <div *ngIf="associateMobileNo.errors.required">*required</div>
-            <div *ngIf="associateMobileNo.errors.pattern">Mobile number should match the pre-defined pattern</div>
+        <div class="row m-3">
+            <div class="col-m-6 w-50">
+                <input type="text" class="form-control" id="associateMobileNo" ngModel name="associateMobileNo" placeholder="Associate Mobile No" #associateMobileNo="ngModel" required [(ngModel)]="theAssociate.associateMobileNo" minlength="10" maxlength="10" pattern="[0-9]{10}"><br>
+            </div>
+            <div class="alert alert-danger" *ngIf="associateMobileNo.touched && !associateMobileNo.valid">
+                <div *ngIf="associateMobileNo.errors.required">*required</div>
+                <div *ngIf="associateMobileNo.errors.pattern">Mobile number should match the pre-defined pattern</div>
+            </div>
         </div>
         <div class="container-fluid">
             <div *ngFor="let skill of theSkill;let i = index">
-                <div class="row">
+                <div class="row ">
 
-                    <div class="col-lg-5">
+                    <div class="col-xs-6 w-40 mr-3 p-3 ">
                         <select id="userSkill" class="form-control" required [(ngModel)]="skill.skillName" #userSkill="ngModel" name="skill.skillName{{i}}">
                 <option *ngFor="let k of responseDetails; let i = index" [value]="responseDetails[i]">
                     {{responseDetails[i]}}
@@ -39,7 +48,7 @@
 
                         </div>
                     </div>
-                    <div class="col-lg-5">
+                    <div class="col-xs-6 w-40 p-3 ">
                         <select id="userSkillLevel" class="form-control" required [(ngModel)]="skill.skillLevel" name="skill.skillLevel{{i}}" #userSkillLevel="ngModel">
                 <option value="">Select skill level</option>
                 <option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]" [value]="[i]">
@@ -51,11 +60,11 @@
 
                         </div>
                     </div>
-                    <div class="col-lg-1">
-                        <button (click)="removeValue(i)" [disabled]="butDisabled" class="btn btn-danger">Remove</button>
+                    <div class="col-lg-1 p-3">
+                        <span (click)="removeValue(i)" [disabled]="butDisabled"><i class="fa fa-minus-circle" style="font-size:48px;color:red;margin-right: -10px;"></i></span>
                     </div>
-                    <div class="col-lg-1">
-                        <button (click)="addvalue()" class="btn btn-primary">ADD</button>
+                    <div class="col-lg-1 p-3">
+                        <span (click)="addvalue()"><i class="fa fa-plus-circle" style="font-size:48px;color:green;margin-left: -10px;"></i></span>
                     </div>
                 </div>
                 <br>
@@ -66,7 +75,7 @@
         <br>
 
 
-        <button type="button" (click)="addNewAssociate()" class=" btn btn-success btn-lg btn-block" [disabled]="!associateCreationForm.form.valid">Add Associate</button>
+        <button type="button" (click)="addNewAssociate()" class=" btn btn-success btn-lg btn-block" [disabled]="!associateCreationForm.form.valid" style="width: 200px;margin-left: 15px;">Add Associate</button>
 
     </div>
 </form>

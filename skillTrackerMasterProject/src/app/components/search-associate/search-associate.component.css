@@ -15,13 +15,6 @@ body {
     width: 60%
 }
 
-
-/* #sect1 {  
-    background-image: url("../../assets/images/background.jpg");  
-    background-size: 100% ;  
-    background-size: cover;  
-}  */
-
 .profilepicture {
     height: 100px;
     width: 100px;
@@ -47,42 +40,4 @@ body {
 
 .addAssociate {
     float: right;
-}
-
-.noteCardContainer {
-    /* width: 200px; */
-    display: flex;
-    flex-direction: row;
-    flex-wrap: row;
-    margin-top: 40px;
-    /* align-items: center; */
-    text-align: center;
-}
-
-.noteCard {
-    width: 175px;
-    align-content: center;
-    text-align: center;
-    overflow: hidden;
-    padding: 10px;
-    margin: 10px;
-    border: 1px solid rgb(3, 15, 15);
-    display: flex;
-    flex-direction: column;
-    text-overflow: ellipsis;
-    border-radius: 10%;
-    justify-content: center;
-}
-
-.mat-card-image {
-    width: 150px;
-    height: 150px;
-    /* align-content: center; */
-    /* align-items: center; */
-}
-
-.imgContainer {
-    height: auto;
-    width: auto;
-    text-align: center;
 }

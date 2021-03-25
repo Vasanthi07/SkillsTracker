@@ -32,34 +32,21 @@
         </div>
     </div><br>
     <div class="associateDetails row">
-        <div class='noteCardContainer'>
-            <mat-card class="noteCard" *ngFor="let associate of responseData" [routerLink]="['/update-associate',associate.associateId]">
-                <img src="../../../assets/images/profile.png" class="mat-card-image img-fluid rounded-circle" alt="user avatar">
-                <mat-card-title>
-                    <h2>{{associate.associateName}}</h2>
-                </mat-card-title>
-                <mat-card-content routerLink="../add-associate">
-                    <h2 style="font-size: 15px;">{{associate.associateEmail}}</h2>
-                    <h2 style="font-size: 15px;">{{associate.associateMobileNo}}</h2>
-
-                </mat-card-content>
-            </mat-card>
+        <div class="card text-dark bg-white" style="width: 200px" *ngFor="let value of responseData">
+            <div class="card-body" [routerLink]="['/update-associate',value.associateId]">
+                <img class="profilepicture img-fluid rounded-circle" src="../../assets/images/profile.png" alt="Can't load image">
+                <h5 class="card-title">{{value.associateName}}</h5>
+                <p class="card-text"><a href="#">{{value.associateEmail}}</a><br>
+                </p>
+            </div>
         </div>
-        <!-- <div class="card text-dark bg-white" style="width: 200px" *ngIf="responseDataById && !responseData"> -->
-        <div class='noteCardContainer' *ngIf="responseDataById && !responseData">
-            <mat-card class="noteCard" [routerLink]="['/update-associate',responseDataById.associateId]">
-
-                <img src="../../../assets/images/profile.png" class="mat-card-image img-fluid rounded-circle center" alt="user avatar">
-
-                <mat-card-title>
-                    <h2>{{responseDataById.associateName}}</h2>
-                </mat-card-title>
-                <mat-card-content>
-                    <h2 style="font-size: 15px;">{{responseDataById.associateEmail}}</h2>
-                    <h2 style="font-size: 15px;">{{responseDataById.associateMobileNo}}</h2>
-
-                </mat-card-content>
-            </mat-card>
+        <div class="card text-dark bg-white" style="width: 200px;" *ngIf="responseDataById && !responseData">
+            <div class="card-body" [routerLink]="['/update-associate',responseDataById.associateId]">
+                <img class=" profilepicture img-fluid rounded-circle " src="../../assets/images/profile.png " alt="Can 't load image">
+                <h5 class="card-title">{{responseDataById.associateName}}</h5>
+                <p class="card-text"><a href="#">{{responseDataById.associateEmail}}</a><br></p>
+                <p class="card-text">{{responseDataById.associateMobileNo}}</p>
+            </div>
         </div>
     </div>
 </div>

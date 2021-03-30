@@ -1,8 +1,9 @@
-<h3 style="text-align: center; padding: 30px; margin-left: 15px;"><strong>Add Associate</strong> </h3>
+<h3 style="text-align: center; padding: 30px; margin-left: 15px;">
+    <strong>Add Associate</strong> </h3>
 <form #associateCreationForm="ngForm">
     <div class="form-group text-center border border-dark p-3 m-3" style="margin-top:20px;">
         <div class="row m-3">
-            <div class="col-m-6 w-50">
+            <div class="col-m-6 w-100">
                 <input type="text" id="associateName" class="form-control" placeholder="Associate Name" required ngModel name="associateName" [(ngModel)]="theAssociate.associateName" #associateName="ngModel" (change)="display(associateName)"><br>
             </div>
             <!-- Create this division below the field for any validation messages -->
@@ -12,7 +13,7 @@
         </div>
 
         <div class="row m-3">
-            <div class="col-m-6 w-50">
+            <div class="col-m-6 w-100">
                 <input type="text" id="associateEmail" class="form-control" placeholder="Associate Email" required minlength="3" pattern="^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$" ngModel name="associateEmail" [(ngModel)]="theAssociate.associateEmail"
                     #associateEmail="ngModel"><br>
             </div>
@@ -25,7 +26,7 @@
         </div>
 
         <div class="row m-3">
-            <div class="col-m-6 w-50">
+            <div class="col-m-6 w-100">
                 <input type="text" class="form-control" id="associateMobileNo" ngModel name="associateMobileNo" placeholder="Associate Mobile No" #associateMobileNo="ngModel" required [(ngModel)]="theAssociate.associateMobileNo" minlength="10" maxlength="10" pattern="[0-9]{10}"><br>
             </div>
             <div class="alert alert-danger" *ngIf="associateMobileNo.touched && !associateMobileNo.valid">
@@ -34,12 +35,14 @@
             </div>
         </div>
         <div class="container-fluid">
-            <div *ngFor="let skill of theSkill;let i = index">
+            <div class="col-m-6 w-100" *ngFor="let skill of theSkill;let i = index">
                 <div class="row ">
 
-                    <div class="col-xs-6 w-40 mr-3 p-3 ">
+                    <div class="col-lg-4 p-3 ">
+
                         <select id="userSkill" class="form-control" required [(ngModel)]="skill.skillName" #userSkill="ngModel" name="skill.skillName{{i}}">
-                <option *ngFor="let k of responseDetails; let i = index" [value]="responseDetails[i]">
+                            <option value="" disabled selected>Select the skills</option>
+                            <option *ngFor="let k of responseDetails; let i = index" [value]="responseDetails[i]">
                     {{responseDetails[i]}}
                   </option>
             </select>
@@ -48,9 +51,10 @@
 
                         </div>
                     </div>
-                    <div class="col-xs-6 w-40 p-3 ">
+                    <div class="col-lg-4 p-3 ">
+
                         <select id="userSkillLevel" class="form-control" required [(ngModel)]="skill.skillLevel" name="skill.skillLevel{{i}}" #userSkillLevel="ngModel">
-                <option value="">Select skill level</option>
+                            <option value="" disabled selected>Select the skill level </option>
                 <option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]" [value]="[i]">
                     {{i}}
                   </option>
@@ -60,11 +64,13 @@
 
                         </div>
                     </div>
-                    <div class="col-lg-1 p-3">
-                        <span (click)="removeValue(i)" [disabled]="butDisabled"><i class="fa fa-minus-circle" style="font-size:48px;color:red;margin-right: -10px;"></i></span>
+                    <div class="col-lg-2 p-3">
+
+                        <span (click)="removeValue(i)" [disabled]="butDisabled"><i class="fa fa-minus-circle" style="font-size:35px;color:red;margin-right: -10px;"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span (click)="addvalue()"><i class="fa fa-plus-circle" style="font-size:35px;color:green;margin-left: -10px;"></i></span>
+
                     </div>
                     <div class="col-lg-1 p-3">
-                        <span (click)="addvalue()"><i class="fa fa-plus-circle" style="font-size:48px;color:green;margin-left: -10px;"></i></span>
                     </div>
                 </div>
                 <br>

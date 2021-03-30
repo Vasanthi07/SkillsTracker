@@ -1,9 +1,12 @@
-body {
-    background-image: url("../../../assets/images/background.jpg");
-    background-repeat: no-repeat;
-    height: 100%;
+.container-fluid {
+    /* background-image: url("../../../assets/images/bgimage.jpg"); */
+    background-repeat: repeat-y;
+    height: 650 px;
     background-position: center;
     background-size: cover;
+    background-size: 100%;
+    /* padding: -30px; */
+    margin-top: -25px;
 }
 
 .searchassociates {
@@ -12,12 +15,15 @@ body {
 
 .searchCriteria {
     margin-top: 20px;
-    width: 60%
+    width: 60%;
+    padding: 40px;
 }
 
 .profilepicture {
     height: 100px;
     width: 100px;
+    margin-left: 12%;
+    margin-right: 12%;
 }
 
 .infoHeading {
@@ -40,4 +46,18 @@ body {
 
 .addAssociate {
     float: right;
+}
+
+.card-body {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(8, 7, 42, 1) 75%, rgb(8, 10, 63) 100%);
+    ;
+    border-radius: 20%;
+    text-align: center;
+    color: papayawhip;
+}
+
+.emailLink {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
 }

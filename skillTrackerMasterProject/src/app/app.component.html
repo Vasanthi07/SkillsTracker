@@ -1,2 +1,68 @@
+<div>
+    <mat-toolbar class="toolBar">
+        <mat-toolbar-row>
+            <button style="background: black; color:white;" mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
+         <span > <mat-icon>menu</mat-icon></span>
+        </button>
+            <span style="color: white;">Skills Tracker</span>
+            <span class="example-spacer"></span>
+            <div fxShow="true" fxHide.lt-md="true">
+                <!-- The following menu items will be hidden on both SM and XS screen sizes -->
+                <a (click)="searchAssociate()" mat-button>
+                    <mat-icon>search</mat-icon>
+                    Search
+                </a>
+                <a (click)="addAssociate()" mat-button>
+                    <mat-icon>person_add</mat-icon>
+                    Add Associate
+                </a>
+                <a (click)="addSkill()" mat-button>
+                    <mat-icon>psychology</mat-icon>
+                    Add Skill
+                </a>
+                <a href="login" *ngIf="!loginFlag" mat-button>
 
+                    <mat-icon>login</mat-icon>
+                    login
+                </a>
+                <a (click)="logout()" *ngIf="loginFlag" mat-button>
+                    <mat-icon>logout</mat-icon>
+                    logout
+                </a>
+            </div>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-sidenav-container fxFlexFill class="custom-sidenav-container">
+        <mat-sidenav #sidenav>
+            <mat-nav-list class="menuList">
+                <a (click)="searchAssociate()" mat-list-item>
+                    <mat-icon>search</mat-icon>
+                    Search
+                </a>
+                <a (click)="addAssociate()" mat-list-item>
+                    <mat-icon>person_add</mat-icon>
+                    Add Associate</a>
+                <a (click)="addSkill()" mat-list-item>
+                    <mat-icon>psychology</mat-icon>
+                    Add Skill
+                </a>
+                <a href="login" *ngIf="!loginFlag" mat-list-item>
+                    <mat-icon>login</mat-icon>
+                    Login
+                </a>
+                <a (click)="logout()" *ngIf="loginFlag" mat-list-item>
+                    <mat-icon>logout</mat-icon>
+                    logout
+                </a>
+
+                <a (click)="sidenav.toggle()" mat-list-item>
+                    <mat-icon>close</mat-icon> Close
+                </a>
+            </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content fxFlexFill>
+            <!-- <span id="search" [routerLink]="['/search-associate']"></span> -->
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
 <router-outlet></router-outlet>

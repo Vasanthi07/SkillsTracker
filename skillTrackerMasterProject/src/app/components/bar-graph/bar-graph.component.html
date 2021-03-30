@@ -1,7 +1,11 @@
 <!-- <p>bar-graph works!</p> -->
 
 
-<div class="chart-wrapper">
-    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
-  </canvas>
+<div class="bar-chart chart-wrapper">
+    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType" [colors]="barChartColors">
+</canvas>
+    <div class="graph-scale">
+        <small>X-axis : Skill Names</small><br>
+        <small>Y-axis : Skill Levels(0-10)</small>
+    </div>
 </div>

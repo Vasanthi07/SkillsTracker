@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Associates } from 'src/app/associates';
 import { AssociatesService } from 'src/app/services/associates.service';
 import { Skills } from 'src/app/skills';
@@ -17,17 +18,32 @@ export class AddAssociateComponent implements OnInit {
   butDisabled: boolean = false;
   divs: number[] = [];
 
+  
+
   theAssociate: Associates = new Associates();
   skill: Skills= new Skills;
   theSkill=[];
   responseDetails: any;
 
-  constructor(private httpClient:HttpClient,private theService:AssociatesService,private router:Router) {
+  constructor(private httpClient:HttpClient,private theService:AssociatesService,private router:Router,private toastr:ToastrService) {
     this.theSkill.push({skill: ""});
    }
 
   ngOnInit(): void {
+    
+    if(localStorage.getItem("loginStatus")=="logged in succesfully"){
+      this.router.navigate(['/add-associate']);
+    }
+    else{
+      localStorage.setItem('redirectURL','/add-associate');
+      this.router.navigate(['/login']);
+    }
 
+    // localStorage.setItem("redirectURL","khgcidhug");
+
+    // console.log(localStorage.getItem("redirectURL"));
+
+    
     //for creating skills in combo box which is obtained from skills entry database
     let responseDataBack = this.httpClient.get("http://localhost:8065/api/associates/skillentry");
     responseDataBack.subscribe((responseData)=>
@@ -71,23 +87,55 @@ export class AddAssociateComponent implements OnInit {
     console.log(this.theSkill.push(this.skill));
   }
 
+  duplicateSkills :string[]=[];
   addNewAssociate() {
-    this.theAssociate.skills=this.theSkill;
-    console.log(this.theAssociate);
+    console.log(this.theSkill);
+    this.duplicateSkills= this.checkDuplicateSkills(this.theSkill);
 
-    let proceed = confirm("do you want to contiue?");
-     if(proceed){
-     
-       
-     
-    let responseDataBack = this.theService.addNewAssociate(this.theAssociate);
+    console.log(this.duplicateSkills + "welcome");
+    if(this.duplicateSkills.length>0){
+      alert("duplicate skills");
+    }
+    else{
+      this.theAssociate.skills=this.theSkill;
+      console.log(this.theAssociate);
+  
+      let proceed = confirm("do you want to contiue?");
+       if(proceed){
+      let responseDataBack = this.theService.addNewAssociate(this.theAssociate);
+      responseDataBack.subscribe((responseData) => {
 
-    responseDataBack.subscribe((responseData) => {
-      alert(responseData.message);
-      this.router.navigate(['/search-associate'])
+        console.log(responseData.message);
+        if(responseData.message = "New skill added successfully"){
+          // alert(responseData.message);
+          this.toastr.success(responseData.message, "Success");
+        }
+        // this.toastr.success(responseData.message,"success");
+        // alert(responseData.message);
+
+        this.router.navigate(['/search-associate'])
+      
+      });
+    }
+    }
     
-    });
   }
+  iter :number =0;
+  results:string[];
+  checkDuplicateSkills(skill) : string [] {
+    console.log(skill.length)
+    console.log(skill[0].skillName);
+    this.results=[];
+    // this.sorted_arr = skill.skillName.sort();
+    // console.log(this.sorted_arr);
+    for(this.iter = 0; this.iter<skill.length-1;this.iter++){
+      if(skill[this.iter+1].skillName==skill[this.iter].skillName){
+        console.log(skill[this.iter].skillName);
+        this.results.push(skill[this.iter].skillName);
+      }
+    }
+    console.log(this.results);
+    return this.results;
   }
 
 

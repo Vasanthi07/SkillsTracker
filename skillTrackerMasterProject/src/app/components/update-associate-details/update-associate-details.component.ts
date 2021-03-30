@@ -24,6 +24,14 @@ export class UpdateAssociateDetailsComponent implements OnInit {
   constructor(private route:ActivatedRoute,private httpClient:HttpClient, private theService:AssociatesService,private router:Router) { }
 
   ngOnInit(): void {
+
+    if(localStorage.getItem("loginStatus")=="logged in succesfully"){
+      this.router.navigate(['/update-details']);
+    }
+    else{
+      localStorage.setItem('redirectURL','/update-details');
+      this.router.navigate(['/login']);
+    }
     this.route.paramMap.subscribe(params=>{
       this.associateId = params.get('id');
       console.log(this.associateId);
@@ -43,6 +51,7 @@ export class UpdateAssociateDetailsComponent implements OnInit {
   associateFormEditableContent(){
 
     //gets details based on associate id 
+    
     let responseDataBack = this.httpClient.get("http://localhost:8065/api/associates/associateId/"+this.associateId);
     responseDataBack.subscribe((responseData)=>
     {
@@ -89,17 +98,27 @@ export class UpdateAssociateDetailsComponent implements OnInit {
   }
 
   responseData:any;
+  duplicateSkills :string[]=[];
   //updates associate details based on associate Id
   updateAssociate(){
-    let proceed = confirm("do you want to update??");
-    if(proceed){
-    let responseDataBack = this.theService.updateAssociate(this.theAssociate.associateId, this.theAssociate);
-    responseDataBack.subscribe((responseData)=>{
-      this.responseData = responseData;
-      alert(responseData.message);
-      this.router.navigate(['/search-associate']);
-    });
-  }
+
+    console.log(this.theAssociate.skills)
+    this.duplicateSkills= this.checkDuplicateSkills(this.theAssociate.skills)
+    if(this.duplicateSkills.length>0){
+      alert("duplicate skills");
+    }
+    else{
+      let proceed = confirm("do you want to update??");
+      if(proceed){
+      let responseDataBack = this.theService.updateAssociate(this.theAssociate.associateId, this.theAssociate);
+      responseDataBack.subscribe((responseData)=>{
+        this.responseData = responseData;
+        alert(responseData.message);
+        this.router.navigate(['/search-associate']);
+      });
+    }
+    }
+    
 
   }
 
@@ -116,6 +135,25 @@ export class UpdateAssociateDetailsComponent implements OnInit {
     });
   }
 }
+
+iter :number =0;
+  results:string[];
+  checkDuplicateSkills(skill) : string [] {
+    console.log(skill.length)
+    console.log(skill[2].skillName);
+    this.results=[];
+    // this.sorted_arr = skill.skillName.sort();
+    // console.log(this.sorted_arr);
+    for(this.iter = 0; this.iter<skill.length-1;this.iter++){
+      if(skill[this.iter+1].skillName==skill[this.iter].skillName){
+        console.log(skill[this.iter].skillName);
+        this.results.push(skill[this.iter].skillName);
+      }
+    }
+    console.log(this.results);
+    return this.results;
+  }
+
 
 
 }

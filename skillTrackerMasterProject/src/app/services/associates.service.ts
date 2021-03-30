@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Associates } from '../associates';
+import { LoginDetails } from '../logindetails';
 import { SkillsEntry } from '../skillsentry';
 
 @Injectable({
@@ -30,5 +31,15 @@ export class AssociatesService {
   deleteEmployee(associateId: any) {
     return this.httpClient.delete("http://localhost:8065/api/associates/"+associateId);
   }
+
+  logIn(managerEmail: string,login:LoginDetails) {
+    return this.httpClient.put<LoginDetails>("http://localhost:8065/api/manager/login/"+managerEmail,login);
+  }
+
+  addNewUser(login: LoginDetails) {
+    return this.httpClient.post<LoginDetails>("http://localhost:8065/api/manager/newUser",login);
+  }
+  
+  
   
 }

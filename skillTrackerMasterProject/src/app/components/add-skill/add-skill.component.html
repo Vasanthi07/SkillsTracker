@@ -1,14 +1,33 @@
-<!-- <p>add-skill works!</p> -->
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 
-<h3>Skills can be only added by Manager</h3>
-<div class="mb-3 row">
-    <!-- create a text box to enter the skill manager want to add -->
-    <label for="inputText" class="col-sm-2 col-form-label">Skill</label>
-    <div class="col-auto">
-        <input type="text" class="form-control" id="inputText" name="skill" [(ngModel)]="theSkillEntry.skill">
-    </div>
-    <!-- on clicking it checks skills in the database and adds to the database -->
-    <div class="col-auto">
-        <button class="btn btn-primary" (click)="addSkill()">Add</button>
+<div class="container login-container">
+    <div class="row">
+        <div class="col-md-6 login-form-1">
+            <h3>Skills can be only added by Manager</h3>
+            <form>
+                <div class="form-group">
+                    <input type="search" class="form-control" id="inputText" onfocus=" " name="skill" [(ngModel)]="theSkillEntry.skill" required>
+
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <input type="submit" (click)="addSkill()" class="btnSubmit" value="Add" />
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6 p-3 ">
+            <select id="userSkill" class="form-control" required>
+                <option selected value="" disabled selected>Available Skills</option>
+                <option *ngFor="let k of responseDetails; let i = index" [value]="responseDetails[i]">
+        {{responseDetails[i]}}
+      </option>
+</select>
+        </div>
+        <!-- <div class="col-md-6 ">
+            <img src="../../../assets/images/mainpage2.jpg" class="backImg">
+        </div> -->
     </div>
 </div>

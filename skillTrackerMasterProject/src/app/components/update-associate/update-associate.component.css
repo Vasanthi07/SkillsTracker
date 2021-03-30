@@ -5,3 +5,25 @@
     right: 50px;
     height: 30px;
 }
+
+.graph-css {
+    padding: 3% 5% 5% 5%;
+}
+
+.jumbotron {
+    border: 1px solid peachpuff;
+    background-color: white;
+    padding: 4%;
+    border-radius: 5%;
+    box-shadow: 10px 10px 10px 0px rgba(25, 7, 104, 0.2), 10px 9px 26px 10px rgba(0, 0, 0, 0.19);
+}
+
+.jumbotron:hover {
+    position: relative;
+    top: -25px;
+    left: -35px;
+    width: 500px;
+    height: auto;
+    display: block;
+    z-index: 999;
+}

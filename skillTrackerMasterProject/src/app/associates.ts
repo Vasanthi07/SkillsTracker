@@ -7,4 +7,6 @@ export class Associates {
     associateMobileNo : string;
     skills: Array<Skills>=[];
     message:string;
+//   statusCode: number;
+  
 }

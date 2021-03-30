@@ -12,6 +12,22 @@ import { UpdateAssociateComponent } from './components/update-associate/update-a
 import { UpdateAssociateDetailsComponent } from './components/update-associate-details/update-associate-details.component';
 import { ChartsModule } from 'ng2-charts';
 import { BarGraphComponent } from './components/bar-graph/bar-graph.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatButtonModule} from '@angular/material/button';
+
+import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatIconModule} from '@angular/material/icon';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginPageComponent } from './components/login-page/login-page.component'; 
+import {MatMenuModule} from '@angular/material/menu';
+import { MatCardModule } from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { ToastrModule } from 'ngx-toastr';
+
+
 
 
 @NgModule({
@@ -23,6 +39,8 @@ import { BarGraphComponent } from './components/bar-graph/bar-graph.component';
     UpdateAssociateComponent,
     UpdateAssociateDetailsComponent,
     BarGraphComponent,
+    LoginPageComponent,
+    SignUpComponent,
     
   ],
   imports: [
@@ -30,7 +48,20 @@ import { BarGraphComponent } from './components/bar-graph/bar-graph.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ChartsModule
+    ChartsModule,
+    MatToolbarModule,
+    MatButtonModule,
+    FlexLayoutModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatListModule,
+    BrowserAnimationsModule,
+    MatMenuModule,
+    MatCardModule,
+    MatFormFieldModule,
+    ToastrModule.forRoot()
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]

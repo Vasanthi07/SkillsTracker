@@ -1,0 +1,27 @@
+<div class="displayTable">
+    <div class="displayTableCell">
+
+        <div class="authBlock">
+            <h3>Register User</h3>
+
+            <div class="formGroup">
+                <input type="email" class="form-control" placeholder="Email Address" #userEmail required [(ngModel)]=login.managerEmail>
+            </div>
+
+            <div class="formGroup">
+                <input type="password" class="form-control" placeholder="Password" #userPwd required [(ngModel)]=login.managerPassword>
+            </div>
+
+            <div class="formGroup">
+                <input type="button" class="btn btn-block btn-primary" value="Sign Up" (click)=newUser()>
+            </div>
+
+
+        </div>
+
+        <div class="redirectToLogin">
+            <span>Already have an account? <span class="redirect" routerLink="/login">Log In</span></span>
+        </div>
+    </div>
+
+</div>

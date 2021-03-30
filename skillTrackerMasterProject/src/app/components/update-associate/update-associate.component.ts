@@ -17,6 +17,14 @@ export class UpdateAssociateComponent implements OnInit {
 
   ngOnInit(): void {
 
+    if(localStorage.getItem("loginStatus")=="logged in succesfully"){
+      this.router.navigate(['/update-associate']);
+    }
+    else{
+      localStorage.setItem('redirectURL','/update-associate');
+      this.router.navigate(['/login']);
+    }
+
     //the associate is send through the router link and assign to your local variable to access it 
     this.route.paramMap.subscribe(params=>{
       this.associateId = params.get('id');
@@ -39,7 +47,7 @@ export class UpdateAssociateComponent implements OnInit {
     });
   }
 
-  graphFlag : boolean =false;
+  graphFlag : boolean =true;
   displayGraph(){
     this.graphFlag = true;
     

@@ -109,5 +109,11 @@ public class AssociatesController {
 	Optional<Skills> getAllSkillsFromSkillsTable(){
 		return service.getAllSkillsFromSkillTable();
 	}
+	
+	//get all associates by names
+	@RequestMapping("associates/names/start/{name}")
+	List<Associates> findByStartOfName(@PathVariable String name){
+		return service.findByStartOfName(name);
+	}
 
 }

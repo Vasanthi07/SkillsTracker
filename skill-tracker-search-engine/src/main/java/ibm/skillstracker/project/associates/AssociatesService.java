@@ -178,4 +178,11 @@ public class AssociatesService {
 		return (repo.getAllSkills());
 	}
 	
+	
+	
+	List<Associates> findByStartOfName(String name){
+//		return repo.findByStartOfName(name);
+		return repo.findByAssociateNameContaining(name);
+	}
+	
 }

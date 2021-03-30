@@ -22,6 +22,8 @@ public interface AssociateRepository extends CrudRepository<Associates, Integer>
 
 	List<Associates> findBySkills_SkillName(String skillName);
 	
+	List<Associates> findByAssociateNameContaining(String associateName);
+	
 	@Query(nativeQuery = true,value="select skillName from associateskills where associateId = :id")
 	List<String> checkBySkillName(@Param("id") Integer associateId);
 
@@ -48,6 +50,10 @@ public interface AssociateRepository extends CrudRepository<Associates, Integer>
 
 	@Query(nativeQuery = true,value="select * from associateskills")
 	Optional<Skills> getAllSkills();
+
+	
+	@Query(nativeQuery = true,value="select * from associates where associateName like %:name% ")
+	List<Associates> findByStartOfName(@Param("name") String name);
 	
 
 	

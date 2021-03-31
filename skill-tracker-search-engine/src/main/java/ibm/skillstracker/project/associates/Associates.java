@@ -44,6 +44,17 @@ public class Associates {
 //	@Cascade(value={CascadeType.ALL})
 	private Set<Skills> skills = new HashSet<Skills>();
 	
+//	@Column(length = 45,nullable = true)
+//	private String image;
+//	
+//	public String getImage() {
+//		return image;
+//	}
+//
+//	public void setImage(String image) {
+//		this.image = image;
+//	}
+
 	@Transient
 	private String message;
 

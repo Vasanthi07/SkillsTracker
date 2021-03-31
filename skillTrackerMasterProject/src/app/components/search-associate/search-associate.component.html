@@ -5,7 +5,7 @@
         <!-- <button id="search-button" type="button" (click)="searchForAll()" class="searchAll btn btn-primary"> -->
         <!-- Search All Associates -->
         <!-- </button><br> -->
-        <div class="searchCriteria input-group">
+        <!-- <!-- <div class="searchCriteria input-group">
             <select class="form-control" id="searchOption" ngModel name="searchOption" #searchOption="ngModel" required (change)="displaySearchOption(searchOption)">
           <option value="">Select one</option>
           <option value="associateId">search By Id</option>
@@ -13,31 +13,31 @@
           <option value="associateEmail">search By Email</option>
           <option value="skillName">search By Skills</option>
           <option value="mobileNo">search By mobileNo</option>
-        </select>
-            <div class="form-outline">
-                <input id="search-input" (keyup)="searchForUser()" type="search" id="form1" class="form-control" [(ngModel)]="searchValue" onfocus=" " required />
-            </div>
-            <button id="search-button" type="button" (click)="searchForUser()" class="btn btn-primary">
+        </select> -->
+        <div class="form-outline">
+            <input id="search-input" (keyup)="searchForAll()" type="text" id="form1" class="form-control" [(ngModel)]="searchValue" name="search" onfocus=" " required />
+        </div>
+        <button id="search-button" type="button" (click)="searchForAll()" class="btn btn-primary">
           Search
         </button>
-        </div>
-    </div><br>
-    <div class="associateDetails row">
-        <div class="card text-dark bg-white" style="width: 200px;border-radius: 20%;" *ngFor="let value of responseData">
-            <div class="card-body" [routerLink]="['/update-associate',value.associateId]">
-                <img class="profilepicture img-fluid rounded-circle" src="../../assets/images/profile1.jpg" alt="Can't load image">
-                <h5 class="card-title">{{value.associateName}}</h5>
-                <p class="card-text"><a class="emailLink" href="#">{{value.associateEmail}}</a><br>
-                </p>
-                <p class="card-text">{{value.associateMobileNo}}</p>
-            </div>
-        </div>
-        <div class="card text-dark bg-white" style="width: 200px;border-radius: 20%;" *ngIf="responseDataById && !responseData">
-            <div class="card-body" [routerLink]="['/update-associate',responseDataById.associateId]">
-                <img class=" profilepicture img-fluid rounded-circle " src="../../assets/images/profile1.jpg " alt="Can 't load image">
-                <h5 class="card-title">{{responseDataById.associateName}}</h5>
-                <p class="card-text"><a class="emailLink" href="#">{{responseDataById.associateEmail}}</a><br></p>
-                <p class="card-text ">{{responseDataById.associateMobileNo}}</p>
-            </div>
+    </div>
+</div><br>
+<div class="associateDetails row">
+    <div class="card text-dark bg-white" style="width: 200px;border-radius: 20%;" *ngFor="let value of responseData | filter :searchValue">
+        <div class="card-body" [routerLink]="['/update-associate',value.associateId]">
+            <img class="profilepicture img-fluid rounded-circle" src="../../assets/images/profile1.jpg" alt="Can't load image">
+            <h5 class="card-title">{{value.associateName}}</h5>
+            <p class="card-text"><a class="emailLink" href="#">{{value.associateEmail}}</a><br>
+            </p>
+            <p class="card-text">{{value.associateMobileNo}}</p>
         </div>
     </div>
+    <!-- <div class="card text-dark bg-white" style="width: 200px;border-radius: 20%;" *ngIf="responseDataById && !responseData">
+        <div class="card-body" [routerLink]="['/update-associate',responseDataById.associateId]">
+            <img class=" profilepicture img-fluid rounded-circle " src="../../assets/images/profile1.jpg " alt="Can 't load image">
+            <h5 class="card-title">{{responseDataById.associateName}}</h5>
+            <p class="card-text"><a class="emailLink" href="#">{{responseDataById.associateEmail}}</a><br></p>
+            <p class="card-text ">{{responseDataById.associateMobileNo}}</p>
+        </div>
+    </div> -->
+</div>

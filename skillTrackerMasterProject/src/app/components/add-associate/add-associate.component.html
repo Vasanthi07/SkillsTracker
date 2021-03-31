@@ -1,8 +1,38 @@
 <h3 style="text-align: center; padding: 30px; margin-left: 15px;">
     <strong>Add Associate</strong> </h3>
-<form #associateCreationForm="ngForm">
+<form #associateCreationForm="ngForm" enctype="multipart/form-data">
     <div class="form-group text-center border border-dark p-3 m-3" style="margin-top:20px;">
-        <div class="row m-3">
+        <!-- <div class="row m-3">
+
+
+            <div class="col-md-6">
+                <p><input type="file" name="fileImage" id="fileImage" accept="image/png, image/jpg,image/jpeg"></p>
+                <p><img id="thumbnail" alt="profile preview"></p>
+            </div>
+        </div> -->
+
+        <!-- <div class="col-md-6">
+            <input type="button" (click)="onUpload()" value="upload">
+        </div> -->
+        <!-- 
+        <div class="col-md-12">
+            <div *ngIf=message>{{message}}</div>
+        </div>
+        <hr/>
+        <div class="container row">
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="name" placeholder="image name" [(ngModel)]="imageName" name="name" />
+            </div>
+            <div class="col-md-6">
+                <input type="button" (click)="getImage()" value="Get Image">
+            </div>
+        </div> -->
+        <div class="container row">
+            <div class="col-md-12">
+                <div *ngIf=retrievedImage>
+                    <img [src]="retrievedImage">
+                </div>
+            </div>
             <div class="col-m-6 w-100">
                 <input type="text" id="associateName" class="form-control" placeholder="Associate Name" required ngModel name="associateName" [(ngModel)]="theAssociate.associateName" #associateName="ngModel" (change)="display(associateName)"><br>
             </div>

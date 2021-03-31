@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddAssociateComponent } from './components/add-associate/add-associate.component';
 import { AddSkillComponent } from './components/add-skill/add-skill.component';
 import { BarGraphComponent } from './components/bar-graph/bar-graph.component';
+import { ImageComponent } from './components/image/image.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { SearchAssociateComponent } from './components/search-associate/search-associate.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
@@ -40,6 +41,8 @@ const routes: Routes = [
   // }
   ,{
     path:'sign-up',component:SignUpComponent
+  },{
+    path:'image',component:ImageComponent
   }
 ];
 

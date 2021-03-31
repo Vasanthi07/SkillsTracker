@@ -7,6 +7,7 @@ export class Associates {
     associateMobileNo : string;
     skills: Array<Skills>=[];
     message:string;
+    // image:Array<
 //   statusCode: number;
   
 }

@@ -26,6 +26,10 @@ import { MatCardModule } from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ImageComponent } from './components/image/image.component';
+
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 
 
 
@@ -41,6 +45,7 @@ import { ToastrModule } from 'ngx-toastr';
     BarGraphComponent,
     LoginPageComponent,
     SignUpComponent,
+    ImageComponent,
     
   ],
   imports: [
@@ -59,7 +64,8 @@ import { ToastrModule } from 'ngx-toastr';
     MatMenuModule,
     MatCardModule,
     MatFormFieldModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    Ng2SearchPipeModule
 
 
   ],
